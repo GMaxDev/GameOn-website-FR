@@ -40,6 +40,7 @@ img {
 .main-navbar {
     float: right;
 }
+
 .topnav a {
   float: left;
   display: block;
@@ -457,9 +458,11 @@ input[data-error]::after {
 .hero-img {
   grid-column: span 8;
 }
+
 .hero-img img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   display: block;
   padding: 0;
 }
@@ -527,3 +530,10 @@ footer {
   }
 }
 
+/* ------------------------------------------- */
+
+.error-style {
+  color: red;
+  font-weight: 300;
+  font-size: 16px;
+}

@@ -38,30 +38,44 @@ function validate(values) {
 
   if (!values.name || values.name.length < 2) {
     errors.name = "Veuillez entrer 2 caractères ou plus pour le champ du Prénom"
+  } else {
+    errors.name = ''
   }
 
   if (!values.lastName || values.lastName.length < 2) {
     errors.lastName = "Veuillez entrer 2 caractères ou plus pour le champ du nom"
+  } else {
+    errors.lastName = ''
   }
 
   if (!values.email || !emailReg.test(values.email)) {
     errors.email = "Veuillez entrer un email valide"
+  } else {
+    errors.email = ''
   }
 
   if (!values.birthdate || !birthdateReg.test(values.birthdate)) {
     errors.birthdate = "Veuillez entrer une date de naissance valide"
+  } else {
+    errors.birthdate = ''
   }
 
   if (values.turnamentNumber > 99) {
     errors.turnamentNumber = "Veuillez entrer un nombre de tournoi inférieur à 99"
+  } else {
+    errors.turnamentNumber = ''
   }
 
   if (values.location === null) {
     errors.location = "Veuillez sélectionner le lieu du tournoi auquel vous souhaitez participer"
+  } else {
+    errors.location = ''
   }
 
   if (!values.cgu) {
     errors.cgu = "Veuillez accepter les conditions d'utilisation"
+  } else {
+    errors.cgu = ''
   }
 
   return errors
@@ -71,7 +85,7 @@ function validate(values) {
 function displayError(errors) {
   Object.entries(errors).forEach(([errorName, errorValue]) => {
     const element = document.getElementById(`error-${errorName.toLowerCase()}`)
-
+    console.log(element)
     element.innerHTML = errorValue
   })
 }
@@ -103,10 +117,11 @@ form.addEventListener("submit", (event) => {
       newsletter,
     }
 
+    console.log(allValues)
     const errors = validate(allValues)
     displayError(errors)
 
-    const isValid = Object.keys(errors).length === 0
+    const isValid = Object.values(errors).every(error => error.length === 0)
 
     if (!isValid) {
       return

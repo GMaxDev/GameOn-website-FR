@@ -85,8 +85,11 @@ function validate(values) {
 function displayError(errors) {
   Object.entries(errors).forEach(([errorName, errorValue]) => {
     const element = document.getElementById(`error-${errorName.toLowerCase()}`)
-    console.log(element)
     element.innerHTML = errorValue
+
+    if (element) {
+      element.innerHTML = errorValue;
+    }
   })
 }
 

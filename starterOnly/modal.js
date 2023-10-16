@@ -34,6 +34,8 @@ function validate(values) {
   const errors = {}
 
   const emailReg = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$")
+
+  //Cette regex est au format yyyy-mm-dd, différente de l'affichage dd/mm/yyyy
   const birthdateReg = new RegExp("^(19|20)\\d\\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$")
 
   if (!values.name || values.name.length < 2) {
@@ -83,9 +85,9 @@ function validate(values) {
 
 //Fonction permettant d"afficher les différentes erreurs rencontrées
 function displayError(errors) {
+  //On boucle sur chaque pair pour afficher les erreurs présentes
   Object.entries(errors).forEach(([errorName, errorValue]) => {
     const element = document.getElementById(`error-${errorName.toLowerCase()}`)
-    element.innerHTML = errorValue
 
     if (element) {
       element.innerHTML = errorValue;
@@ -122,8 +124,10 @@ form.addEventListener("submit", (event) => {
 
     console.log(allValues)
     const errors = validate(allValues)
+    console.log(errors)
     displayError(errors)
 
+    // On vérifie si chaque entrée du tableau est vide
     const isValid = Object.values(errors).every(error => error.length === 0)
 
     if (!isValid) {
